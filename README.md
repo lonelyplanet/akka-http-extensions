@@ -6,9 +6,9 @@ akka-http-extensions its a simple library with useful tools for develop web apps
 This is an updated project that uses Akka-http instead of Spray: https://github.com/Jarlakxen/spray-extensions
 
 
-### Repository
+### Downloading
 
-Stable [OSS Sonatype](https://oss.sonatype.org/content/repositories/releases/com/github/jarlakxen/)
+  [ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg) ](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
 
     "com.lonelyplanet" %% "akka-http-extensions" % "0.3"
 
@@ -17,6 +17,8 @@ Stable [OSS Sonatype](https://oss.sonatype.org/content/repositories/releases/com
 0.3
 - Pagination support
 
+
+# Features
 
 ## Pagination Support
 

@@ -7,7 +7,7 @@ name := "akka-http-extensions"
 
 organization := "com.lonelyplanet"
 
-version := "0.3.1"
+version := "0.4.0"
 
 scalaVersion := "2.11.8"
 
@@ -30,13 +30,16 @@ resolvers ++= Seq("OSS" at "http://oss.sonatype.org/content/repositories/release
 libraryDependencies ++= {
   val akkaVersion = "2.3.15" //downgraded because of akkaStream requirements/compatibility
   val akkaStreamVersion = "2.0.4"
+  val scalaTestVersion      = "3.0.0-M15"
 
   Seq(
-    "com.typesafe.akka" %% "akka-actor" % akkaVersion % "provided",
-    "com.typesafe.akka" %% "akka-stream-experimental" % akkaStreamVersion % "provided",
-    "com.typesafe.akka" %% "akka-http-core-experimental" % akkaStreamVersion % "provided",
-    "com.typesafe.akka" %% "akka-http-experimental" % akkaStreamVersion % "provided",
-    "com.typesafe.akka" %% "akka-http-spray-json-experimental" % akkaStreamVersion % "provided"
+    "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion % "provided",
+    "com.typesafe.akka"    %% "akka-stream-experimental"             % akkaStreamVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-core-experimental"          % akkaStreamVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-experimental"               % akkaStreamVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaStreamVersion % "provided",
+    "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
+    "com.typesafe.akka"    %% "akka-http-testkit-experimental"       % akkaStreamVersion % "test"
   )
 }
 

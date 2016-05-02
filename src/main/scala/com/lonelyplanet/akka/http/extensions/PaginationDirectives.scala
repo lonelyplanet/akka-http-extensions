@@ -7,8 +7,8 @@ import scala.collection.immutable.Seq
 
 trait PaginationDirectives {
 
-  private val IndexParam = Config.get[String]("akka.http.extensions.pagination.index-param-name") || "page"
-  private val SizeParam = Config.get[String]("akka.http.extensions.pagination.size-param-name") || "size"
+  private val OffsetParam = Config.get[String]("akka.http.extensions.pagination.offset-param-name") || "offset"
+  private val LimitParam = Config.get[String]("akka.http.extensions.pagination.limit-param-name") || "limit"
   private val SortParam = Config.get[String]("akka.http.extensions.pagination.sort-param-name") || "sort"
 
   private val AscParam = Config.get[String]("akka.http.extensions.pagination.asc-param-name") || "asc"
@@ -19,22 +19,22 @@ trait PaginationDirectives {
 
   def pagination: Directive1[Option[PageRequest]] =
     parameterMap.flatMap { params =>
-      (params.get(IndexParam).map(_.toInt), params.get(SizeParam).map(_.toInt)) match {
-        case (Some(index), Some(size)) => provide(Some(deserializePage(index, size, params.get(SortParam))))
-        case (Some(index), None)       => reject(MalformedPaginationRejection("Missing page size parameter", None))
-        case (None, Some(size))        => reject(MalformedPaginationRejection("Missing page index parameter", None))
-        case (_, _)                    => provide(None)
+      (params.get(OffsetParam).map(_.toInt), params.get(LimitParam).map(_.toInt)) match {
+        case (Some(offset), Some(limit)) => provide(Some(deserializePage(offset, limit, params.get(SortParam))))
+        case (Some(offset), None)        => reject(MalformedPaginationRejection("Missing page limit parameter", None))
+        case (None, Some(limit))         => reject(MalformedPaginationRejection("Missing page offset parameter", None))
+        case (_, _)                      => provide(None)
       }
     }
 
-  private def deserializePage(index: Int, size: Int, sorting: Option[String]) = {
+  private def deserializePage(offset: Int, limit: Int, sorting: Option[String]) = {
 
     val sortingParam = sorting.map(_.split(SortingSeparator).map(_.span(_ != OrderSeparator)).collect {
       case (field, sort) if sort == ',' + AscParam  => (field, Order.Asc)
       case (field, sort) if sort == ',' + DescParam => (field, Order.Desc)
     }.toMap)
 
-    PageRequest(index, size, sortingParam.getOrElse(Map.empty))
+    PageRequest(offset, limit, sortingParam.getOrElse(Map.empty))
   }
 
   case class MalformedPaginationRejection(errorMsg: String, cause: Option[Throwable] = None) extends Rejection
@@ -48,6 +48,6 @@ object Order {
   case object Desc extends Order
 }
 
-case class PageRequest(index: Int, size: Int, sort: Map[String, Order])
+case class PageRequest(offset: Int, limit: Int, sort: Map[String, Order])
 
 case class PageResponse[T](elements: Seq[T], totalElements: Int)
