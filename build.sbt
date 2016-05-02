@@ -7,7 +7,7 @@ name := "akka-http-extensions"
 
 organization := "com.lonelyplanet"
 
-version := "0.2"
+version := "0.3.1"
 
 scalaVersion := "2.11.8"
 
@@ -49,6 +49,10 @@ ScalariformKeys.preferences := ScalariformKeys.preferences.value
   .setPreference(SpacesAroundMultiImports, false)
   .setPreference(CompactControlReadability, false)
 
+bintrayOrganization := Some("lonelyplanet")
+
+licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
+
 val doNotPublishSettings = Seq(publish := {})
 
 val publishSettings =
@@ -75,6 +79,5 @@ val publishSettings =
       publishArtifact in Test := false,
       homepage := Some(url("https://github.com/lonelyplanet/akka-http-extensions")),
       publishMavenStyle := false,
-      resolvers += Resolver.url("lonelyplanet ivy resolver", url("http://dl.bintray.com/lonelyplanet/maven"))(Resolver.ivyStylePatterns),
-      licenses := ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.txt")) :: Nil
+      resolvers += Resolver.url("lonelyplanet ivy resolver", url("http://dl.bintray.com/lonelyplanet/maven"))(Resolver.ivyStylePatterns)
     )
