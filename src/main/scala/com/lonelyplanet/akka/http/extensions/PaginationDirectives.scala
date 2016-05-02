@@ -1,7 +1,7 @@
-package com.wlangiewicz.akka.http.extensions
+package com.lonelyplanet.akka.http.extensions
 
 import akka.http.scaladsl.server.{Directive1, Rejection}
-import com.wlangiewicz.utils.Config._
+import com.lonelyplanet.utils.Config._
 import akka.http.scaladsl.server.Directives._
 import scala.collection.immutable.Seq
 

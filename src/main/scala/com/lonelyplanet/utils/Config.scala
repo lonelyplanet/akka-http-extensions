@@ -1,4 +1,4 @@
-package com.wlangiewicz.utils
+package com.lonelyplanet.utils
 
 import com.typesafe.config.ConfigFactory
 import scala.util._

@@ -5,7 +5,7 @@ import scalariform.formatter.preferences._
 
 name := "akka-http-extensions"
 
-organization := "com.wlangiewicz"
+organization := "com.lonelyplanet"
 
 version := "0.2"
 
@@ -60,21 +60,21 @@ val publishSettings =
     )
   else
     Seq(
-      organization := "com.wlangiewicz",
+      organization := "com.lonelyplanet",
       pomExtra := <scm>
-        <url>https://github.com/wlk/akka-http-extensions</url>
-        <connection>https://github.com/wlk/akka-http-extensions</connection>
+        <url>https://github.com/lonelyplanet/akka-http-extensions</url>
+        <connection>https://github.com/lonelyplanet/akka-http-extensions</connection>
       </scm>
         <developers>
           <developer>
             <id>wlk</id>
             <name>Wojciech Langiewicz</name>
-            <url>https://github.com/wlk/akka-http-extensions</url>
+            <url>https://github.com/lonelyplanet/akka-http-extensions</url>
           </developer>
         </developers>,
       publishArtifact in Test := false,
-      homepage := Some(url("https://github.com/wlk/akka-http-extensions")),
+      homepage := Some(url("https://github.com/lonelyplanet/akka-http-extensions")),
       publishMavenStyle := false,
-      resolvers += Resolver.url("wlangiewicz ivy resolver", url("http://dl.bintray.com/wlangiewicz/maven"))(Resolver.ivyStylePatterns),
+      resolvers += Resolver.url("lonelyplanet ivy resolver", url("http://dl.bintray.com/lonelyplanet/maven"))(Resolver.ivyStylePatterns),
       licenses := ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.txt")) :: Nil
     )
