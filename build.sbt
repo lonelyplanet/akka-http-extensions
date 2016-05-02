@@ -5,7 +5,9 @@ import scalariform.formatter.preferences._
 
 name := "akka-http-extensions"
 
-version := "0.1"
+organization := "com.wlangiewicz"
+
+version := "0.2"
 
 scalaVersion := "2.11.8"
 
@@ -46,3 +48,33 @@ ScalariformKeys.preferences := ScalariformKeys.preferences.value
   .setPreference(DoubleIndentClassDeclaration, true)
   .setPreference(SpacesAroundMultiImports, false)
   .setPreference(CompactControlReadability, false)
+
+val doNotPublishSettings = Seq(publish := {})
+
+val publishSettings =
+  if (version.toString.endsWith("-SNAPSHOT"))
+    Seq(
+      publishTo := Some("Artifactory Realm" at "http://oss.jfrog.org/artifactory/oss-snapshot-local"),
+      bintrayReleaseOnPublish := false,
+      credentials := List(Path.userHome / ".bintray" / ".artifactory").filter(_.exists).map(Credentials(_))
+    )
+  else
+    Seq(
+      organization := "com.wlangiewicz",
+      pomExtra := <scm>
+        <url>https://github.com/wlk/akka-http-extensions</url>
+        <connection>https://github.com/wlk/akka-http-extensions</connection>
+      </scm>
+        <developers>
+          <developer>
+            <id>wlk</id>
+            <name>Wojciech Langiewicz</name>
+            <url>https://github.com/wlk/akka-http-extensions</url>
+          </developer>
+        </developers>,
+      publishArtifact in Test := false,
+      homepage := Some(url("https://github.com/wlk/akka-http-extensions")),
+      publishMavenStyle := false,
+      resolvers += Resolver.url("wlangiewicz ivy resolver", url("http://dl.bintray.com/wlangiewicz/maven"))(Resolver.ivyStylePatterns),
+      licenses := ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.txt")) :: Nil
+    )

@@ -21,16 +21,16 @@ trait PaginationDirectives {
     parameterMap.flatMap { params =>
       (params.get(IndexParam).map(_.toInt), params.get(SizeParam).map(_.toInt)) match {
         case (Some(index), Some(size)) => provide(Some(deserializePage(index, size, params.get(SortParam))))
-        case (Some(index), None) => reject(MalformedPaginationRejection("Missing page size parameter", None))
-        case (None, Some(size)) => reject(MalformedPaginationRejection("Missing page index parameter", None))
-        case (_, _) => provide(None)
+        case (Some(index), None)       => reject(MalformedPaginationRejection("Missing page size parameter", None))
+        case (None, Some(size))        => reject(MalformedPaginationRejection("Missing page index parameter", None))
+        case (_, _)                    => provide(None)
       }
     }
 
   private def deserializePage(index: Int, size: Int, sorting: Option[String]) = {
 
     val sortingParam = sorting.map(_.split(SortingSeparator).map(_.span(_ != OrderSeparator)).collect {
-      case (field, sort) if sort == ',' + AscParam => (field, Order.Asc)
+      case (field, sort) if sort == ',' + AscParam  => (field, Order.Asc)
       case (field, sort) if sort == ',' + DescParam => (field, Order.Desc)
     }.toMap)
 
