@@ -2,7 +2,7 @@ package com.lonelyplanet.akka.http.extensions
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.{Directive1, Rejection}
-import com.typesafe.config.{Config, ConfigFactory}
+import com.typesafe.config.Config
 
 import scala.collection.immutable.Seq
 import scala.util.Try
@@ -36,19 +36,22 @@ trait PaginationDirectives {
   private lazy val SortingSeparator = get[String]("akka.http.extensions.pagination.sorting-separator") || ";"
   private lazy val OrderSeparator = get[Char]("akka.http.extensions.pagination.order-separator") || ','
 
-  private lazy val ShouldFallbackToDefaultLimits = get[Boolean]("akka.http.extensions.pagination.defaults.enabled") || false
+  private lazy val ShouldFallbackToDefaults = get[Boolean]("akka.http.extensions.pagination.defaults.enabled") || false
 
-  private val DefaultOffsetParam = get[Int]("akka.http.extensions.pagination.defaults.offset") || 10
-  private val DefaultLimitParam = get[Int]("akka.http.extensions.pagination.defaults.limit") || 10
+  private lazy val ShouldAlwaysFallbackToDefaults = get[Boolean]("akka.http.extensions.pagination.defaults.always-fallback") || false
+
+  private lazy val DefaultOffsetParam = get[Int]("akka.http.extensions.pagination.defaults.offset") || 10
+  private lazy val DefaultLimitParam = get[Int]("akka.http.extensions.pagination.defaults.limit") || 10
 
   def pagination: Directive1[Option[PageRequest]] =
     parameterMap.flatMap { params =>
       (params.get(OffsetParam).map(_.toInt), params.get(LimitParam).map(_.toInt)) match {
         case (Some(offset), Some(limit)) => provide(Some(deserializePage(offset, limit, params.get(SortParam))))
-        case (Some(offset), None) if ShouldFallbackToDefaultLimits => provide(Some(deserializePage(offset, DefaultLimitParam, params.get(SortParam))))
-        case (Some(offset), None)  => reject(MalformedPaginationRejection("Missing page limit parameter", None))
-        case (None, Some(limit)) if ShouldFallbackToDefaultLimits => provide(Some(deserializePage(DefaultOffsetParam, limit, params.get(SortParam))))
-        case (None, Some(limit))  => reject(MalformedPaginationRejection("Missing page offset parameter", None))
+        case (Some(offset), None) if ShouldFallbackToDefaults => provide(Some(deserializePage(offset, DefaultLimitParam, params.get(SortParam))))
+        case (Some(offset), None) => reject(MalformedPaginationRejection("Missing page limit parameter", None))
+        case (None, Some(limit)) if ShouldFallbackToDefaults => provide(Some(deserializePage(DefaultOffsetParam, limit, params.get(SortParam))))
+        case (None, Some(limit)) => reject(MalformedPaginationRejection("Missing page offset parameter", None))
+        case (_, _) if ShouldAlwaysFallbackToDefaults => provide(Some(deserializePage(DefaultOffsetParam, DefaultLimitParam, params.get(SortParam))))
         case (_, _) => provide(None)
       }
     }

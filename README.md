@@ -71,6 +71,7 @@ akka.http {
                 order-separator  = ","
                 defaults {
                     enabled = true
+                    always-fallback = true
                     offset = 10
                     limit = 10
                 }
