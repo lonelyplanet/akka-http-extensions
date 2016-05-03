@@ -9,7 +9,8 @@ import scala.concurrent.duration.FiniteDuration
 class PaginationSpec extends FlatSpec with PaginationDirectives with Matchers with ScalatestRouteTest {
   implicit val routeTestTimeout: RouteTestTimeout = RouteTestTimeout(FiniteDuration(10, "s"))
   val config = testConfig
-  def route =
+
+  def paginationRoute =
     path("filter-test") {
       pagination { page =>
         complete {
@@ -17,6 +18,15 @@ class PaginationSpec extends FlatSpec with PaginationDirectives with Matchers wi
             case Some(p) => p.toString
             case None    => "NoPage"
           }
+        }
+      }
+    }
+
+  def paginationOrDefaultsRoute =
+    path("filter-test") {
+      paginationOrDefaults { page =>
+        complete {
+          page.toString
         }
       }
     }

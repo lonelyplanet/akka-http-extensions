@@ -10,7 +10,7 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
   [ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg) ](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
 
-    "com.lonelyplanet" %% "akka-http-extensions" % "0.3"
+    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.3"
 
 ### Changelog
 
@@ -39,6 +39,17 @@ path("filter-test") {
 }
 ```
 
+Alternatively you can use:
+```
+path("filter-test") {
+  paginationOrDefaults { page =>
+    complete {
+      // page is always set
+    }
+  }
+}
+```
+
 The page object has this format
 
 ```
@@ -60,46 +71,22 @@ The name of the parameters can be configured through [Typesafe Config](https://g
 
 akka.http {
     extensions {
-        rest {
-            pagination{
-                index-param-name = "page"
-                size-param-name  = "size"
-                sort-param-name  = "sort"
-                asc-param-name   = "asc"
-                desc-param-name  = "desc"
-                sorting-separator = ";"
-                order-separator  = ","
-                defaults {
-                    enabled = true
-                    always-fallback = true
-                    offset = 10
-                    limit = 10
-                }
+        pagination{
+            index-param-name = "page"
+            size-param-name  = "size"
+            sort-param-name  = "sort"
+            asc-param-name   = "asc"
+            desc-param-name  = "desc"
+            sorting-separator = ";"
+            order-separator  = ","
+            defaults {
+                enabled = true
+                always-fallback = true
+                offset = 10
+                limit = 10
             }
         }
     }
 }
 
 ```
-
-When you replay a page, you sometime needs to send te total number of elements. This is useful for the client for knowing how many pages they are. For this scenario there is:
-
-```
-
-path("filter-test") {
-  pagination { page =>
-    complete {
-      page match {
-        case Some(page) => {
-            val response = PageResponse(List("test"), 10)
-            completePage(response)
-        }
-        case None => ... // No page was requested
-      }
-    }
-  }
-}
-
-```
-
-The total number of elements is sent in the header `total_elements`

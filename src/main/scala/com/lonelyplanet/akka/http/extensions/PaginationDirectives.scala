@@ -40,9 +40,18 @@ trait PaginationDirectives {
 
   private lazy val ShouldAlwaysFallbackToDefaults = get[Boolean]("akka.http.extensions.pagination.defaults.always-fallback") || false
 
-  private lazy val DefaultOffsetParam = get[Int]("akka.http.extensions.pagination.defaults.offset") || 10
+  private lazy val DefaultOffsetParam = get[Int]("akka.http.extensions.pagination.defaults.offset") || 0
   private lazy val DefaultLimitParam = get[Int]("akka.http.extensions.pagination.defaults.limit") || 10
 
+  /**
+   * Might return PageRequest
+   * If both offset and limit are set - PageRequest is returned
+   * If `defaults.enabled` -> if one of parameters is set, the other one is read from configuration
+   * If `defaults.always-fallback` -> if none of the parameters is set, both are read from configuration
+   * Otherwise returns None
+   *
+   * @return Option[PageRequest] - depending on configuration settings and HTTP request parameters
+   */
   def pagination: Directive1[Option[PageRequest]] =
     parameterMap.flatMap { params =>
       (params.get(OffsetParam).map(_.toInt), params.get(LimitParam).map(_.toInt)) match {
@@ -55,6 +64,24 @@ trait PaginationDirectives {
         case (_, _) => provide(None)
       }
     }
+
+  /**
+   * Always returns a PageRequest
+   * If values are passed as part of HTTP request, they are taken from it
+   * If not, (default) values are read from configuration
+   *
+   * @return PageRequest - taken from HTTP request or from configuration defaults
+   */
+  def paginationOrDefaults: Directive1[PageRequest] = {
+    parameterMap.flatMap { params =>
+      (params.get(OffsetParam).map(_.toInt), params.get(LimitParam).map(_.toInt)) match {
+        case (Some(offset), Some(limit)) => provide(deserializePage(offset, limit, params.get(SortParam)))
+        case (Some(offset), None)        => provide(deserializePage(offset, DefaultLimitParam, params.get(SortParam)))
+        case (None, Some(limit))         => provide(deserializePage(DefaultOffsetParam, limit, params.get(SortParam)))
+        case (_, _)                      => provide(deserializePage(DefaultOffsetParam, DefaultLimitParam, params.get(SortParam)))
+      }
+    }
+  }
 
   private def deserializePage(offset: Int, limit: Int, sorting: Option[String]) = {
 
