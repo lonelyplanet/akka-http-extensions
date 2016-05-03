@@ -10,12 +10,13 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
   [ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg) ](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
 
-    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.3"
+    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.4"
 
 ### Changelog
 
 0.4
 - Fallback to default limit and offset parameters in case they are missing
+
 0.3
 - Pagination support
 

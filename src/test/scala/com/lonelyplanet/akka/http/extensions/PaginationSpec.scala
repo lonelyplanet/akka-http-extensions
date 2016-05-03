@@ -12,7 +12,7 @@ class PaginationSpec extends FlatSpec with PaginationDirectives with Matchers wi
 
   def paginationRoute =
     path("filter-test") {
-      pagination { page =>
+      withOptionalPagination { page =>
         complete {
           page match {
             case Some(p) => p.toString
@@ -24,7 +24,7 @@ class PaginationSpec extends FlatSpec with PaginationDirectives with Matchers wi
 
   def paginationOrDefaultsRoute =
     path("filter-test") {
-      paginationOrDefaults { page =>
+      withPagination { page =>
         complete {
           page.toString
         }

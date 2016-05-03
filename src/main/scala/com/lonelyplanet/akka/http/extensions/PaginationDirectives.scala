@@ -52,7 +52,7 @@ trait PaginationDirectives {
    *
    * @return Option[PageRequest] - depending on configuration settings and HTTP request parameters
    */
-  def pagination: Directive1[Option[PageRequest]] =
+  def withOptionalPagination: Directive1[Option[PageRequest]] =
     parameterMap.flatMap { params =>
       (params.get(OffsetParam).map(_.toInt), params.get(LimitParam).map(_.toInt)) match {
         case (Some(offset), Some(limit)) => provide(Some(deserializePage(offset, limit, params.get(SortParam))))
@@ -72,7 +72,7 @@ trait PaginationDirectives {
    *
    * @return PageRequest - taken from HTTP request or from configuration defaults
    */
-  def paginationOrDefaults: Directive1[PageRequest] = {
+  def withPagination: Directive1[PageRequest] = {
     parameterMap.flatMap { params =>
       (params.get(OffsetParam).map(_.toInt), params.get(LimitParam).map(_.toInt)) match {
         case (Some(offset), Some(limit)) => provide(deserializePage(offset, limit, params.get(SortParam)))
