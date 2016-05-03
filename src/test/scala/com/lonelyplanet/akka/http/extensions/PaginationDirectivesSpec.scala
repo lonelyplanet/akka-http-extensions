@@ -10,6 +10,36 @@ import scala.concurrent.duration.FiniteDuration
 class PaginationDirectivesSpec extends FlatSpec with PaginationDirectives with Matchers with ScalatestRouteTest {
 
   implicit val routeTestTimeout: RouteTestTimeout = RouteTestTimeout(FiniteDuration(10, "s"))
+  val config = testConfig
+
+override def testConfigSource = "akka.http.extensions.pagination.defaults.enabled = true"
+/*  override def testConfigSource =
+    """
+      |akka{
+      |http {
+      |    extensions {
+      |        rest {
+      |            pagination{
+      |                index-param-name = "page"
+      |                size-param-name  = "size"
+      |                sort-param-name  = "sort"
+      |                asc-param-name   = "asc"
+      |                desc-param-name  = "desc"
+      |                sorting-separator = ";"
+      |                order-separator  = ","
+      |                defaults {
+      |                    enabled = true
+      |                    offset = 10
+      |                    limit = 10
+      |                }
+      |            }
+      |        }
+      |    }
+      |    }
+      |}
+    """.stripMargin*/
+
+
 
   def route =
     path("filter-test") {
@@ -22,6 +52,8 @@ class PaginationDirectivesSpec extends FlatSpec with PaginationDirectives with M
         }
       }
     }
+
+
 
   "Pagination" should "not have page if no page is requested" in {
 

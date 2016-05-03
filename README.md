@@ -14,6 +14,8 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
 ### Changelog
 
+0.4
+- Fallback to default limit and offset parameters in case they are missing
 0.3
 - Pagination support
 
@@ -58,7 +60,7 @@ The name of the parameters can be configured through [Typesafe Config](https://g
 
 akka.http {
     extensions {
-        rest{
+        rest {
             pagination{
                 index-param-name = "page"
                 size-param-name  = "size"
@@ -67,7 +69,11 @@ akka.http {
                 desc-param-name  = "desc"
                 sorting-separator = ";"
                 order-separator  = ","
-                totalelements-header-name = "total_elements"
+                defaults {
+                    enabled = true
+                    offset = 10
+                    limit = 10
+                }
             }
         }
     }
