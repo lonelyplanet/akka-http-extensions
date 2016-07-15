@@ -1,0 +1,9 @@
+language: scala
+jdk:
+  - oraclejdk8
+scala:
+  - 2.11.8
+branches:
+  only:
+    - master
+script: "sbt clean test"

@@ -1,5 +1,6 @@
 Akka-http Extensions
 ================
+[![Build Status](https://travis-ci.org/lonelyplanet/akka-http-extensions.svg?branch=master)](https://travis-ci.org/lonelyplanet/akka-http-extensions)
 
 akka-http-extensions its a simple library with useful tools for develop web apps with Akka-http.
 
