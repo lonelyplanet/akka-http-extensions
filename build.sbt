@@ -23,23 +23,20 @@ scalacOptions ++= Seq(
   "-deprecation"
 )
 
-
 resolvers ++= Seq("OSS" at "http://oss.sonatype.org/content/repositories/releases/")
 
-
 libraryDependencies ++= {
-  val akkaVersion = "2.3.15" //downgraded because of akkaStream requirements/compatibility
-  val akkaStreamVersion = "2.0.4"
+  val akkaVersion = "2.4.8"
   val scalaTestVersion      = "3.0.0-M15"
 
   Seq(
-    "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion % "provided",
-    "com.typesafe.akka"    %% "akka-stream-experimental"             % akkaStreamVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-core-experimental"          % akkaStreamVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-experimental"               % akkaStreamVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaStreamVersion % "provided",
-    "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
-    "com.typesafe.akka"    %% "akka-http-testkit-experimental"       % akkaStreamVersion % "test"
+    "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion,
+    "com.typesafe.akka"    %% "akka-stream"                          % akkaVersion,
+    "com.typesafe.akka"    %% "akka-http-core"                       % akkaVersion,
+    "com.typesafe.akka"    %% "akka-http-experimental"               % akkaVersion,
+    "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion,
+    "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
+    "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test"
   )
 }
 
