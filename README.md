@@ -11,7 +11,7 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
   [ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg) ](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
 
-    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.5"
+    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.6"
 
 ### Changelog
 

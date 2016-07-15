@@ -7,7 +7,7 @@ name := "akka-http-extensions"
 
 organization := "com.lonelyplanet"
 
-version := "0.4.5"
+version := "0.4.6"
 
 scalaVersion := "2.11.8"
 
@@ -30,11 +30,11 @@ libraryDependencies ++= {
   val scalaTestVersion      = "3.0.0-M15"
 
   Seq(
-    "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion,
-    "com.typesafe.akka"    %% "akka-stream"                          % akkaVersion,
-    "com.typesafe.akka"    %% "akka-http-core"                       % akkaVersion,
-    "com.typesafe.akka"    %% "akka-http-experimental"               % akkaVersion,
-    "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion,
+    "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion % "provided",
+    "com.typesafe.akka"    %% "akka-stream"                          % akkaVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-core"                       % akkaVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-experimental"               % akkaVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
     "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test"
   )
