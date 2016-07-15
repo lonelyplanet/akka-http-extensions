@@ -29,7 +29,7 @@ The trait PaginationDirectives offers some helpers for handling pagination:
 
 ```
 path("filter-test") {
-  pagination { page =>
+  withOptionalPagination { page =>
     complete {
       page match {
         case Some(page) => ... // A page was requested
@@ -43,7 +43,7 @@ path("filter-test") {
 Alternatively you can use:
 ```
 path("filter-test") {
-  paginationOrDefaults { page =>
+  withPagination { page =>
     complete {
       // page is always set
     }
