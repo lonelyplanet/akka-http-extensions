@@ -1,6 +1,9 @@
 Akka-http Extensions
 ================
 
+[![Join the chat at https://gitter.im/lonelyplanet/akka-http-extensions](https://badges.gitter.im/lonelyplanet/akka-http-extensions.svg)](https://gitter.im/lonelyplanet/akka-http-extensions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/lonelyplanet/akka-http-extensions.svg?branch=master)](https://travis-ci.org/lonelyplanet/akka-http-extensions)
+
 akka-http-extensions its a simple library with useful tools for develop web apps with Akka-http.
 
 This is an updated project that uses Akka-http instead of Spray: https://github.com/Jarlakxen/spray-extensions
@@ -10,7 +13,7 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
   [ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg) ](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
 
-    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.4"
+    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.6"
 
 ### Changelog
 
@@ -91,3 +94,12 @@ akka.http {
 }
 
 ```
+
+### Publishing
+
+We use `bintray-sbt` plugin for publishing artifacts, to publish newer version of the library run:
+```
+sbt publish
+```
+
+That's all what is required
