@@ -2,6 +2,9 @@ Akka-http Extensions
 ================
 [![Build Status](https://travis-ci.org/lonelyplanet/akka-http-extensions.svg?branch=master)](https://travis-ci.org/lonelyplanet/akka-http-extensions)
 
+[![Join the chat at https://gitter.im/lonelyplanet/akka-http-extensions](https://badges.gitter.im/lonelyplanet/akka-http-extensions.svg)](https://gitter.im/lonelyplanet/akka-http-extensions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/lonelyplanet/akka-http-extensions.svg?branch=master)](https://travis-ci.org/lonelyplanet/akka-http-extensions)
+
 akka-http-extensions its a simple library with useful tools for develop web apps with Akka-http.
 
 This is an updated project that uses Akka-http instead of Spray: https://github.com/Jarlakxen/spray-extensions
