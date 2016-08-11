@@ -26,17 +26,21 @@ scalacOptions ++= Seq(
 resolvers ++= Seq("OSS" at "http://oss.sonatype.org/content/repositories/releases/")
 
 libraryDependencies ++= {
-  val akkaVersion = "2.4.8"
-  val scalaTestVersion      = "3.0.0-M15"
+  val akkaVersion           = "2.4.8"
+  val scalaTestVersion      = "3.0.0"
+  val logbackClassicVersion = "1.1.6"
 
   Seq(
+    "ch.qos.logback"       %  "logback-classic"                      % logbackClassicVersion % "provided",
     "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-stream"                          % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-core"                       % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-experimental"               % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
-    "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test"
+    "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
+    ("com.lonelyplanet"    %% "scala-util"                           % "0.1.8").exclude("ch.qos.logback", "logback-classic"),
+    "org.zalando"          %% "scala-jsonapi"                        % "0.5.2" % "provided"
   )
 }
 
