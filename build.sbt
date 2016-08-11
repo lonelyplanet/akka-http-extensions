@@ -23,7 +23,10 @@ scalacOptions ++= Seq(
   "-deprecation"
 )
 
-resolvers ++= Seq("OSS" at "http://oss.sonatype.org/content/repositories/releases/")
+resolvers ++= Seq(
+  "OSS" at "http://oss.sonatype.org/content/repositories/releases/",
+  Resolver.bintrayRepo("lonelyplanet", "maven")
+)
 
 libraryDependencies ++= {
   val akkaVersion           = "2.4.8"

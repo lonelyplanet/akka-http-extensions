@@ -18,6 +18,7 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
 0.4
 - Fallback to default limit and offset parameters in case they are missing
+- Add reasonable defaults for exception and rejection handling
 
 0.3
 - Pagination support
@@ -25,9 +26,26 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
 # Features
 
+## Exception Handling
+
+The trait `ExceptionHandling` offers a reasonable defaults for exception and rejection handling.  
+The response type is a `ErrorMessage` which additionally transformed to JsonAPI format.  
+The ID of the exception is extracted from `X-Trace-Token` header  
+
+Example usage (after extending trait `ExceptionHandling`):
+```
+val routing = Route.seal {
+  optionalHeaderValueByName("x-trace-token") { traceToken =>
+    withRequestTimeoutResponse(request => timeoutResponse(traceToken)) {
+      myRoutes
+    }
+  }
+}
+```
+
 ## Pagination Support
 
-The trait PaginationDirectives offers some helpers for handling pagination:
+The trait `PaginationDirectives` offers some helpers for handling pagination:
 
 ```
 path("filter-test") {
