@@ -5,6 +5,7 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import com.lonelyplanet.akka.http.extensions.exceptions.ResourceNotFound
+import com.lonelyplanet.akka.http.extensions.rejections.BadParameterRejection
 import com.lonelyplanet.util.logging.Loggable
 import org.zalando.jsonapi.Jsonapi
 import org.zalando.jsonapi.json.akka.http.AkkaHttpJsonapiSupport._
@@ -29,7 +30,14 @@ trait ExceptionHandling extends Loggable {
 
   implicit def rejectionHandler =
     RejectionHandler.newBuilder()
-      .handleAll[MethodRejection] { methodRejections ⇒
+      .handle {
+        case BadParameterRejection(message) =>
+          optionalHeaderValueByName("x-trace-token") { traceToken =>
+            complete {
+              (BadRequest, ErrorMessage("Invalid query parameter value", traceToken, Some(message)))
+            }
+          }
+      }.handleAll[MethodRejection] { methodRejections ⇒
         val supportedMethods = methodRejections.map(_.supported.name)
         optionalHeaderValueByName("x-trace-token") { traceToken =>
           complete {
