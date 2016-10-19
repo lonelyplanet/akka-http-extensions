@@ -13,6 +13,14 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 ### Downloading
 
     "com.lonelyplanet" %% "akka-http-extensions" % "0.4.8"
+    
+You might need to also add our repository:
+
+```
+resolvers ++= Seq(
+  Resolver.bintrayRepo("lonelyplanet", "maven")
+)
+```    
 
 ### Changelog
 
