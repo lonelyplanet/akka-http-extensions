@@ -29,7 +29,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= {
-  val akkaVersion           = "2.4.8"
+  val akkaVersion           = "2.4.11"
   val scalaTestVersion      = "3.0.0"
   val logbackClassicVersion = "1.1.6"
 
@@ -42,8 +42,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
     "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
-    ("com.lonelyplanet"    %% "scala-util"                           % "0.1.8").exclude("ch.qos.logback", "logback-classic"),
-    "org.zalando"          %% "scala-jsonapi"                        % "0.5.2" % "provided"
+    ("com.lonelyplanet"    %% "scala-util"                           % "0.1.11").exclude("ch.qos.logback", "logback-classic"),
+    "org.zalando"          %% "scala-jsonapi"                        % "0.5.4" % "provided"
   )
 }
 
