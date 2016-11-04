@@ -7,7 +7,7 @@ name := "akka-http-extensions"
 
 organization := "com.lonelyplanet"
 
-version := "0.4.8"
+version := "0.4.9"
 
 scalaVersion := "2.11.8"
 
@@ -32,6 +32,7 @@ libraryDependencies ++= {
   val akkaVersion           = "2.4.11"
   val scalaTestVersion      = "3.0.0"
   val logbackClassicVersion = "1.1.6"
+  val scalaUtilVersion      = "0.2.0"
 
   Seq(
     "ch.qos.logback"       %  "logback-classic"                      % logbackClassicVersion % "provided",
@@ -42,7 +43,7 @@ libraryDependencies ++= {
     "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
     "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
-    ("com.lonelyplanet"    %% "scala-util"                           % "0.1.11").exclude("ch.qos.logback", "logback-classic"),
+    ("com.lonelyplanet"    %% "scala-util"                           % scalaUtilVersion).exclude("ch.qos.logback", "logback-classic"),
     "org.zalando"          %% "scala-jsonapi"                        % "0.5.4" % "provided"
   )
 }
