@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory
 
 import scala.util.Random
 
-
 class TraceTokenMDCLoggingSpec extends FlatSpec with Matchers {
   it should "log trace token if one is present" in {
     withInMemoryAppender { appender =>
