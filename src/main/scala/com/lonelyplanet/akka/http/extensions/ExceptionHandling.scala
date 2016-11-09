@@ -15,7 +15,7 @@ import scala.util.control.NonFatal
 
 trait ExceptionHandling extends Loggable {
 
-  def timeoutResponse(traceToken: Option[String]) = {
+  def timeoutResponse(traceToken: Option[String]): HttpResponse = {
     HttpResponse(
       status = StatusCodes.GatewayTimeout,
       entity = HttpEntity(
@@ -28,7 +28,7 @@ trait ExceptionHandling extends Loggable {
     )
   }
 
-  implicit def rejectionHandler =
+  implicit def rejectionHandler: RejectionHandler =
     RejectionHandler.newBuilder()
       .handle {
         case BadParameterRejection(message) =>
