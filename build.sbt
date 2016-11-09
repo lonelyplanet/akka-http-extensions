@@ -33,6 +33,7 @@ libraryDependencies ++= {
   val scalaTestVersion      = "3.0.0"
   val logbackClassicVersion = "1.1.6"
   val scalaUtilVersion      = "0.2.0"
+  val kamonVersion          = "0.6.3"
 
   Seq(
     "ch.qos.logback"       %  "logback-classic"                      % logbackClassicVersion % "provided",
@@ -44,7 +45,10 @@ libraryDependencies ++= {
     "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
     "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
     ("com.lonelyplanet"    %% "scala-util"                           % scalaUtilVersion).exclude("ch.qos.logback", "logback-classic"),
-    "org.zalando"          %% "scala-jsonapi"                        % "0.5.4" % "provided"
+    "org.zalando"          %% "scala-jsonapi"                        % "0.5.4" % "provided",
+    ("io.kamon"            %% "kamon-core"                           % kamonVersion % "provided").exclude("com.typesafe.akka", "akka-actor_2.11"),
+    "io.kamon"             %% "kamon-scala"                          % kamonVersion % "provided", // Required for logging trace tokens in futures
+    "io.kamon"             %% "kamon-autoweave"                      % kamonVersion % "provided"
   )
 }
 
