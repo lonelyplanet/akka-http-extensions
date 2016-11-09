@@ -7,7 +7,7 @@ name := "akka-http-extensions"
 
 organization := "com.lonelyplanet"
 
-version := "0.4.9"
+version := "0.4.10"
 
 scalaVersion := "2.11.8"
 
