@@ -30,20 +30,21 @@ resolvers ++= Seq(
 
 libraryDependencies ++= {
   val akkaVersion           = "2.4.11"
-  val scalaTestVersion      = "3.0.0"
-  val logbackClassicVersion = "1.1.6"
+  val akkaHttpVersion       = "10.0.0"
+  val scalaTestVersion      = "3.0.1"
+  val logbackClassicVersion = "1.1.7"
   val scalaUtilVersion      = "0.2.1"
   val kamonVersion          = "0.6.3"
-  val jsonApiVersion        = "0.5.4"
+  val jsonApiVersion        = "0.6.0"
 
   Seq(
     "ch.qos.logback"       %  "logback-classic"                      % logbackClassicVersion % "provided",
     "com.typesafe.akka"    %% "akka-actor"                           % akkaVersion % "provided",
     "com.typesafe.akka"    %% "akka-stream"                          % akkaVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-core"                       % akkaVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-experimental"               % akkaVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-spray-json-experimental"    % akkaVersion % "provided",
-    "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaVersion % "test",
+    "com.typesafe.akka"    %% "akka-http-core"                       % akkaHttpVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http"                            % akkaHttpVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-spray-json"                 % akkaHttpVersion % "provided",
+    "com.typesafe.akka"    %% "akka-http-testkit"                    % akkaHttpVersion % "test",
     "org.scalatest"        %% "scalatest"                            % scalaTestVersion % "test",
     ("com.lonelyplanet"    %% "scala-util"                           % scalaUtilVersion).exclude("ch.qos.logback", "logback-classic"),
     "org.zalando"          %% "scala-jsonapi"                        % jsonApiVersion % "provided",
