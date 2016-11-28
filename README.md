@@ -12,7 +12,7 @@ This is an updated project that uses Akka-http instead of Spray: https://github.
 
 ### Downloading
 
-    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.12"
+    "com.lonelyplanet" %% "akka-http-extensions" % "0.4.13"
     
 You might need to also add our repository:
 
