@@ -3,7 +3,7 @@ Akka-http Extensions
 [![Join the chat at https://gitter.im/lonelyplanet/akka-http-extensions](https://badges.gitter.im/lonelyplanet/akka-http-extensions.svg)](https://gitter.im/lonelyplanet/akka-http-extensions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/lonelyplanet/akka-http-extensions.svg?branch=master)](https://travis-ci.org/lonelyplanet/akka-http-extensions)
 [![codecov](https://codecov.io/gh/lonelyplanet/akka-http-extensions/branch/master/graph/badge.svg)](https://codecov.io/gh/lonelyplanet/akka-http-extensions)
-[ ![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg) ](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
+[![Download](https://api.bintray.com/packages/lonelyplanet/maven/akka-http-extensions/images/download.svg)](https://bintray.com/lonelyplanet/maven/akka-http-extensions/_latestVersion)
 
 akka-http-extensions its a simple library with useful tools for develop web apps with Akka-http.
 
@@ -25,6 +25,9 @@ resolvers ++= Seq(
 ### Changelog
 
 0.4
+- `Expires` HTTP header support via `expires` directive
+- Kamon tracing directives - includes support for `X-Trace-Token` HTTP header and MDC logging
+- Request logger
 - Fallback to default limit and offset parameters in case they are missing
 - Add reasonable defaults for exception and rejection handling
 
