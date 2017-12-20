@@ -33,7 +33,7 @@ libraryDependencies ++= {
   val akkaHttpVersion       = "10.0.0"
   val scalaTestVersion      = "3.0.1"
   val logbackClassicVersion = "1.1.7"
-  val scalaUtilVersion      = "0.2.2"
+  val scalaUtilVersion      = "0.2.4"
   val kamonVersion          = "0.6.3"
   val jsonApiVersion        = "0.6.0"
 
