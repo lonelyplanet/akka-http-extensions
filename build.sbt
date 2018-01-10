@@ -9,7 +9,9 @@ organization := "com.lonelyplanet"
 
 version := "0.4.15"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.12"
+
+crossScalaVersions := Seq("2.11.12", "2.12.4")
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 
@@ -29,13 +31,13 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= {
-  val akkaVersion           = "2.4.11"
-  val akkaHttpVersion       = "10.0.0"
+  val akkaVersion           = "2.4.17"
+  val akkaHttpVersion       = "10.0.3"
   val scalaTestVersion      = "3.0.1"
   val logbackClassicVersion = "1.1.7"
   val scalaUtilVersion      = "0.2.4"
-  val kamonVersion          = "0.6.3"
-  val jsonApiVersion        = "0.6.0"
+  val kamonVersion          = "0.6.5"
+  val jsonApiVersion        = "0.6.2"
 
   Seq(
     "ch.qos.logback"       %  "logback-classic"                      % logbackClassicVersion % "provided",
